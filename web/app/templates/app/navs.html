@@ -1,3 +1,4 @@
+<!-- Bootstrap Nav -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="{% url 'home' %}"><img id="logo" src="{% static 'images/icon.png' %}" height="35px"> Lunchbenching</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,3 +22,27 @@
     </form>
   </div>
 </nav>
+
+
+<!-- Primer Nav -->
+<div class="Header">
+  <div class="Header-item">
+    <a href="{% url 'home' %}" class="Header-link f4 d-flex flex-items-center">
+      <img id="logo" src="{% static 'images/icon.png' %}" height="35px">
+      <span>Lunchbenching</span>
+    </a>
+  </div>
+  <div class="Header-item">
+    <input class="form-control input-dark" type="search" placeholder="Search..." aria-label="Search" />
+  </div>
+  <div class="Header-item Header-item--full"></div>
+  <div class="Header-item">
+    <a href="#" class="Header-link f4 d-flex flex-items-center">Benches</a>
+  </div>
+  <div class="Header-item">
+    <a href="#" class="Header-link f4 d-flex flex-items-center">Map</a>
+  </div>
+  <!-- <div class="Header-item mr-0">
+    <img class="avatar" height="20" alt="@icon" src="{% static 'images/icon.png' %}" width="20">
+  </div> -->
+</div>
