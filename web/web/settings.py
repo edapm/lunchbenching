@@ -127,3 +127,5 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+MAPBOX_KEY = "pk.eyJ1IjoiZm9yZ2Vuc3QiLCJhIjoiY2tlaGh1ZzNxMGJoNDJycGQydTNzaGFlMiJ9.kYOvI-wrPwgcGFq9wbMeNw"
