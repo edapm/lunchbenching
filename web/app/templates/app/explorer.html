@@ -1,10 +1,3 @@
-{% extends 'app/generic.html' %}
-{% block title %}
-    <title>Lunchbenching - Benches</title>
-{% endblock title %}
-{% block content %}
-<h1 class="bench-title"><strong>Benches</strong></h1>
-<hr>
 <div class="bench-sidebar">
   <nav class="menu" aria-labelledby="menu-heading">
     <span class="menu-heading" id="menu-heading"><i class="fas fa-search"></i> Search</span>
@@ -14,7 +7,7 @@
     <a class="menu-item" href="#url">By Tags</a>
   </nav>
 {% if benches.has_other_pages %}
-  <nav class="bench-page" aria-label="...">
+  <nav class="bench-page text-align" aria-label="...">
     <ul class="pagination">
     {% if benches.has_previous %}
       <li class="page-item">
@@ -64,4 +57,3 @@
   </div>
 {% endfor %}
 </div>
-{% endblock content %}

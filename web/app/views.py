@@ -40,16 +40,6 @@ def registerPage(request):
     return render(request, 'app/register.html', context)
 
 def home(request):
-    context = {}
-    return render(request, 'app/home.html', context)
-
-def benches(request, pk):
-    bench = Bench.objects.get(id=pk)
-
-    context={'bench': bench}
-    return render(request, 'app/bench.html', context)
-
-def benchlist(request):
     all_benches = Bench.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(all_benches, 4)
@@ -61,8 +51,17 @@ def benchlist(request):
     except EmptyPage:
         benches = paginator.page(paginator.num_pages)
 
-    context = {'benches':benches}
-    return render(request, 'app/benches.html', context)
+    context = {'benches': benches}
+    return render(request, 'app/home.html', context)
+
+def benches(request, pk):
+    bench = Bench.objects.get(id=pk)
+
+    context={'bench': bench}
+    return render(request, 'app/bench.html', context)
+
+def benchlist(request):
+    return redirect('home')
 
 def CreateBench(request):
     form = CreateBenchForm()

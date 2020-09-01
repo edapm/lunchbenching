@@ -1,10 +1,17 @@
+.text-align {
+    text-align: center;
+}
+
+.push {
+    margin-top: 20px;
+}
+
 .hello-msg {
     margin-right: 20px;
   }
 
 .bench-title {
     padding-top: 20px;
-    text-align: center;
 } 
 
 .bench-list {
@@ -33,6 +40,5 @@
 }
 
 .bench-page {
-    text-align: center;
     margin: 5px auto;
 }
