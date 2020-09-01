@@ -6,4 +6,7 @@ urlpatterns = [
     path('b/<str:pk>/', views.benches, name="benches"),
     path('b/', views.benchlist, name="bench-list"),
     path('create/', views.CreateBench, name="create"),
+
+    path('login/', views.loginPage, name="login"),
+    path('signup/', views.registerPage, name="register"),
 ]

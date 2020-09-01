@@ -3,5 +3,28 @@
     <title>Lunchbenching - Bench</title>
 {% endblock title %}
 {% block content %}
-    
+<div class="card">
+    <img src="{{bench.image.url}}" height="150px" class="card-img-top" alt="...">
+    <div class="card-body">
+    <h2 class="card-title"><strong>{{bench.name}}</strong></h2>
+    <hr>
+    <p class="card-text">{{bench.description}}</p>
+    </div>
+    <div class="card-body">
+    {% for tag in bench.tag.all %}
+        <span class="badge badge-primary">{{tag}}</span>
+    {% endfor %}
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{bench.category}}</li>
+        <li class="list-group-item">{{bench.capacity}}</li>
+        <li class="list-group-item">{{bench.condition}}</li>
+    </ul>
+    <div class="card-footer text-muted">
+        {{bench.date_created}}
+        <hr>
+        <button type="button" class="btn btn-outline-dark btn-block">Edit</button>
+    </div>
+</div>
+
 {% endblock content %}
