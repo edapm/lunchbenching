@@ -34,7 +34,7 @@ class Bench(models.Model):
     )
 
     name = models.CharField(max_length=30, null=True)
-    description = models.CharField(max_length=350, null=True, blank=True)
+    description = models.TextField(max_length=350, null=True, blank=True)
     # location = LocationField()
     image = models.ImageField(default="default.png", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)

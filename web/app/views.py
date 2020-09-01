@@ -21,3 +21,15 @@ def benchlist(request):
 
     context = {'benches':benches}
     return render(request, 'app/benches.html', context)
+
+def CreateBench(request):
+    form = CreateBenchForm()
+
+    context = {'form':form}
+    if request.method == 'POST':
+        form = CreateBenchForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/b')
+
+    return render(request, 'app/create.html', context)
