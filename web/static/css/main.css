@@ -28,7 +28,11 @@
     color: azure;
 }
 
-
 .bench-btn {
     margin-top: 30px;
+}
+
+.bench-page {
+    text-align: center;
+    margin: 5px auto;
 }

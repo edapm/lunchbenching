@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from . models import *
 from . forms import *
 
@@ -45,12 +46,20 @@ def home(request):
 def benches(request, pk):
     bench = Bench.objects.get(id=pk)
 
-    form = CreateBenchForm()
-    context={'form': form, 'bench': bench}
+    context={'bench': bench}
     return render(request, 'app/bench.html', context)
 
 def benchlist(request):
-    benches = Bench.objects.all()
+    all_benches = Bench.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(all_benches, 4)
+
+    try:
+        benches = paginator.page(page)
+    except PageNotAnInteger:
+        benches = paginator.page(1)
+    except EmptyPage:
+        benches = paginator.page(paginator.num_pages)
 
     context = {'benches':benches}
     return render(request, 'app/benches.html', context)
@@ -62,7 +71,35 @@ def CreateBench(request):
     if request.method == 'POST':
         form = CreateBenchForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False)
+            obj.save()
+            form.save_m2m()
             return redirect('/b')
 
     return render(request, 'app/create.html', context)
+
+def UpdateBench(request, pk):
+    bench = Bench.objects.get(id=pk)
+    form = CreateBenchForm(instance=bench)
+
+    context = {'form': form}
+    if request.method == 'POST':
+        form = CreateBenchForm(request.POST, instance=bench)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            form.save_m2m()
+            return redirect('/b')
+
+    return render(request, 'app/update.html', context)
+
+def DeleteBench(request, pk):
+    bench = Bench.objects.get(id=pk)
+    if request.method == "POST":
+        bench.delete()
+        return redirect('bench-list')
+    
+    name = bench.name
+
+    context = {'item': bench, 'name': name}
+    return render(request, 'app/delete.html', context)

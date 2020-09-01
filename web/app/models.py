@@ -2,14 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from mapbox_location_field.models import LocationField
 import uuid
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200, null=True)
-
-    def __str__(self):
-        return self.name
+# class Tag(models.Model):
+#    name = models.CharField(max_length=200, null=True)
+#
+#    def __str__(self):
+#        return self.name
 
 class Bench(models.Model):
     CATEGORY = (
@@ -20,7 +21,7 @@ class Bench(models.Model):
     )
 
     CONDITION = (
-        ('Spanking', 'Spanking'),
+        ('Spiffing', 'Spiffing'),
         ('Okay', 'Okay'),
         ('Apalling', 'Appalling'),
         ('Not There', 'Not There'),
@@ -40,7 +41,7 @@ class Bench(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     category = models.CharField(max_length=30, null=True, choices=CATEGORY)
     condition = models.CharField(max_length=30, null=True, choices=CONDITION)
-    tag = models.ManyToManyField(Tag, blank=True)
+    tag = TaggableManager(blank=True)
     capacity = models.CharField(max_length=30, null=True, choices=CAPACITY)
 
 class Profile(models.Model):

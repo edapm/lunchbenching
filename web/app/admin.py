@@ -6,4 +6,3 @@ from . models import *
 
 admin.site.register(Bench)
 admin.site.register(Profile)
-admin.site.register(Tag)

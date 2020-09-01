@@ -1,10 +1,10 @@
 {% extends 'app/generic.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
-<title>Lunchbenching - Create New Bench</title>
+<title>Lunchbenching - Update Bench</title>
 {% endblock title %}
 {% block content %}
-<h1 class="bench-title">Create New Bench</h1>
+<h1 class="bench-title">Update Bench</h1>
 <hr>
 <form action="" method="POST">
     {% csrf_token %}
@@ -29,7 +29,7 @@
             {{form.capacity|as_crispy_field}}
         </div>
     </div>
-    <button type="submit" class="btn btn-success btn-block bench-btn">Create Bench</button>
+    <button type="submit" class="btn btn-success btn-block bench-btn">Update Bench</button>
 </form>
 <br>
 <br>

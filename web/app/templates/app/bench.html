@@ -23,7 +23,8 @@
     <div class="card-footer text-muted">
         {{bench.date_created}}
         <hr>
-        <button type="button" class="btn btn-outline-dark btn-block">Edit</button>
+        <a href="{% url 'update' bench.id %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
+        <a href="{% url 'delete' bench.id %}" class="btn btn-danger btn-lg btn-block" role="button" >Delete</a>
     </div>
 </div>
 

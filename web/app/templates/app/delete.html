@@ -1,0 +1,20 @@
+{% extends 'app/generic.html' %}
+{% block title %}
+    <title>Are you sure you want to delete this bench?</title>
+{% endblock title %}
+{% block content %}
+    <br>
+    <div class="card card-body">
+
+
+        <p>Are you sure you want to delete "{{name}}"?</p>
+
+        <form action="{% url 'delete' item.id  %}" method="POST">
+            
+            {% csrf_token %}
+            <a class="btn btn-warning" href="{% url 'benches' item.id %}">Cancel</a>
+
+            <input class="btn btn-danger" type="submit" value="Confirm">
+        </form>
+    </div>
+{% endblock content %}
