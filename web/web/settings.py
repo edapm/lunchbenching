@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mapbox_location_field',
+    'crispy_forms',
 
     'app',
 ]
@@ -128,4 +130,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 MAPBOX_KEY = "pk.eyJ1IjoiZm9yZ2Vuc3QiLCJhIjoiY2tlaGh1ZzNxMGJoNDJycGQydTNzaGFlMiJ9.kYOvI-wrPwgcGFq9wbMeNw"
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

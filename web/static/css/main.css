@@ -1,0 +1,25 @@
+.hello-msg {
+    margin-right: 20px;
+  }
+
+.bench-title {
+    padding-top: 20px;
+    text-align: center;
+} 
+
+.bench-list {
+    width: 70%;
+    float: right;
+    margin-top: 25px;
+}
+
+.bench-sidebar {
+    width: 30%;
+    float: left;
+    margin-top: 25px;
+}
+
+.bench-sidebar .menu-heading {
+    background-color: #444;
+    color: azure;
+}

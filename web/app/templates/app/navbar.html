@@ -1,0 +1,25 @@
+{% load static %}
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/icon.png ' %}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            Lunchbenching
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'bench-list' %}">Benches</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Map</a>
+                </li>
+            </ul>
+        </div>
+        <span class="hello-msg navbar-text">Hello, <a href="#">{{request.user}}</a>!</span>
+        <span><a class="hello-msg navbar-text" href="#">Logout</a></span>
+    </nav>
+</header>

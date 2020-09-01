@@ -1,0 +1,32 @@
+{% extends 'app/generic.html' %}
+{% block title %}
+    <title>Lunchbenching - Benches</title>
+{% endblock title %}
+{% block content %}
+<h1 class="bench-title"><strong>Benches</strong></h1>
+<hr>
+<nav class="menu bench-sidebar" aria-labelledby="menu-heading">
+  <span class="menu-heading" id="menu-heading">Search</span>
+  <a class="menu-item" href="#url">By Category</a>
+  <a class="menu-item" href="#url">By Capacity</a>
+  <a class="menu-item" href="#url">By Condition</a>
+  <a class="menu-item" href="#url">By Tags</a>
+</nav>
+<div class="row row-cols-1 row-cols-md-2 bench-list">
+{% for bench in benches %}
+  <div class="col mb-4">
+    <div class="card">
+      <img src="{{bench.image.url}}" height="100px" class="card-img-top" alt="...">
+      <hr>
+      <div class="card-body">
+        <h2 class="card-title">{{bench.name}}</h2>
+        <p class="card-text">{{bench.description}}</p>
+        {% for tag in bench.tag.all %}
+            <span class="badge badge-primary">{{tag}}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock content %}
