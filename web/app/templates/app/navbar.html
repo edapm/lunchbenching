@@ -19,10 +19,10 @@
         {% if request.user.is_authenticated %}
         <span class="navbar-text hello-msg"><a href="{% url 'create' %}"><i class="fas fa-plus-square"></i></a></span>
         <span class="hello-msg navbar-text">Hello, <a href="#">{{request.user}}</a>!</span>
-        <span><a class="hello-msg navbar-text" href="#">Logout</a></span>
+        <span><a class="hello-msg navbar-text" href="{% url 'logout' %}">Logout</a></span>
         {% else %}
-        <button class="hello-msg btn btn-outline-light my-2 my-sm-0">Sign Up</button>
-        <button class="hello-msg btn btn-outline-light my-2 my-sm-0">Login</button>
+        <a href="{% url 'register' %}" class="hello-msg btn btn-outline-light my-2 my-sm-0 btn-lg" role="button">Sign Up</a>
+        <a href="{% url 'login' %}" class="hello-msg btn btn-outline-light my-2 my-sm-0 btn-lg" role="button">Login</a>
         {% endif %}
     </nav>
 </header>

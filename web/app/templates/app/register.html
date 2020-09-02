@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     {% include 'app/links.html' %}
+    {% load crispy_forms_tags %}
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <title>Lunchbenching - Sign Up</title>
 </head>
@@ -18,27 +19,7 @@
             <h5 class="card-title text-center">Sign Up</h5>
             <form class="form-signin" method="POST" action="">
               {% csrf_token %}
-              <div class="form-label-group">
-                <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
-                <label for="inputUserame">Username</label>
-              </div>
-
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
-              </div>
-              
-              <hr>
-
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-              
-              <div class="form-label-group">
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                <label for="inputConfirmPassword">Confirm password</label>
-              </div>
+              {{form|crispy}}
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
               <a class="d-block text-center mt-2 small" href="{% url 'login' %}">Login</a>

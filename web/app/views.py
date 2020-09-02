@@ -3,27 +3,37 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from . models import *
 from . forms import *
+from . decorators import *
 
 # Create your views here.
 
+@unauthenticated_user
 def loginPage(request):
-    context = {}
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('home')
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, "Invalid username or password.")
         else:
-            messages.info(request, 'Username or Password is incorrect')
+            messages.error(request, "Invalid username or password.")
+
+    form = AuthenticationForm()
+    context = {'form': form}
 
     return render(request, 'app/login.html', context)
 
+@unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
 
@@ -32,12 +42,22 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
+            Profile.objects.create(
+                user=user,
+                name=user.username,
+                email=user.email,
+            )
 
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
     
     context={'form':form}
     return render(request, 'app/register.html', context)
+
+@login_required(login_url='login')
+def logoutUser(request):
+	logout(request)
+	return redirect('login')
 
 def home(request):
     all_benches = Bench.objects.all()
@@ -63,6 +83,7 @@ def benches(request, pk):
 def benchlist(request):
     return redirect('home')
 
+@login_required(login_url='login')
 def CreateBench(request):
     form = CreateBenchForm()
 
@@ -73,10 +94,11 @@ def CreateBench(request):
             obj = form.save(commit=False)
             obj.save()
             form.save_m2m()
-            return redirect('/')
+            return redirect('home')
 
     return render(request, 'app/create.html', context)
 
+@login_required(login_url='login')
 def UpdateBench(request, pk):
     bench = Bench.objects.get(id=pk)
     form = CreateBenchForm(instance=bench)
@@ -88,10 +110,12 @@ def UpdateBench(request, pk):
             obj = form.save(commit=False)
             obj.save()
             form.save_m2m()
-            return redirect('/b')
+            return redirect('home')
 
     return render(request, 'app/update.html', context)
 
+
+@login_required(login_url='login')
 def DeleteBench(request, pk):
     bench = Bench.objects.get(id=pk)
     if request.method == "POST":

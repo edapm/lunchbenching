@@ -46,6 +46,6 @@ class Bench(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    # username = User.get_username()
     name = models.CharField(max_length=50, null=True)
-    website = models.URLField(null=True)
+    website = models.URLField(null=True, blank=True)
+    email = models.EmailField(null=True)
