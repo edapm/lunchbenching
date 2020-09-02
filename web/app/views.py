@@ -42,6 +42,8 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
+            group = Group.objects.get(name='normal-user')
+            user.groups.add(group)
             Profile.objects.create(
                 user=user,
                 name=user.username,
@@ -79,6 +81,27 @@ def benches(request, pk):
 
     context={'bench': bench}
     return render(request, 'app/bench.html', context)
+
+def userProfile(request, slug):
+    slug = Profile.objects.get(slug=slug)
+
+    context={'user':slug}
+
+    return render(request, 'app/user.html', context)
+
+def updateProfile(request):
+    user = Profile.objects.get(user=request.user)
+    form = UpdateProfileForm(instance=user)
+
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST, instance=user)
+        if form.is_valid():
+                form.save()
+                return redirect('user', request.user)
+    
+    context = {'form': form}
+    
+    return render(request, 'app/user-edit.html', context)
 
 def benchlist(request):
     return redirect('home')

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from mapbox_location_field.models import LocationField
-import uuid
+from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 
 # Create your models here.
@@ -47,5 +47,13 @@ class Bench(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=True)
+    about = models.TextField(max_length=150, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
+    github = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True)
+    image = models.ImageField(default="default.png", null=True, blank=True)
+    slug = models.SlugField()
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(Profile, self).save(*args, **kwargs)

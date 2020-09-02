@@ -1,0 +1,35 @@
+{% extends 'app/generic.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Edit User</title>
+{% endblock title %}
+{% block content %}
+<h1 class="bench-title text-align">Edit your Profile</h1>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            {{form.name|as_crispy_field}}
+            {{form.image|as_crispy_field}}
+        </div>
+        <div class="col">
+            {{form.about|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{form.website|as_crispy_field}}
+        </div>
+        <div class="col">
+            {{form.github|as_crispy_field}}
+        </div>
+        <div class="col">
+            {{form.email|as_crispy_field}}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-block bench-btn">Update Profile</button>
+</form>
+<br>
+<br>
+{% endblock content %}

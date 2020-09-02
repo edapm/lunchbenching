@@ -12,4 +12,7 @@ urlpatterns = [
     path('login/', views.loginPage, name="login"),
     path('signup/', views.registerPage, name="register"),
     path('logout/', views.logoutUser, name="logout"),
+
+    path('u/<str:slug>/', views.userProfile, name="user"),
+    path('update-profile/', views.updateProfile, name="update-profile"),
 ]

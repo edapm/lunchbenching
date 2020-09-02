@@ -1,9 +1,10 @@
 {% extends 'app/generic.html' %}
+{% load humanize %}
 {% block title %}
-    <title>Lunchbenching - Bench</title>
+    <title>Bench - {{bench.name}}</title>
 {% endblock title %}
 {% block content %}
-<div class="card push">
+<div class="card push text-center">
     <img src="{{bench.image.url}}" height="150px" class="card-img-top" alt="...">
     <div class="card-body">
     <h2 class="card-title"><strong>{{bench.name}}</strong></h2>
@@ -22,10 +23,11 @@
         <li class="list-group-item"><b>Location:</b> {{bench.location}}</li>
     </ul>
     <div class="card-footer text-muted">
-        {{bench.date_created}}
+        {{bench.date_created|naturaltime}}
+        {% if request.user.is_authenticated %}
         <hr>
         <a href="{% url 'update' bench.id %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
-        <a href="{% url 'delete' bench.id %}" class="btn btn-danger btn-lg btn-block" role="button" >Delete</a>
+        {% endif %}
     </div>
 </div>
 

@@ -1,0 +1,31 @@
+{% extends 'app/generic.html' %}
+{% block title %}
+    <title>User - {{user.name}}</title>
+{% endblock title %}
+{% block content %}
+<div class="card push text-center">
+    <div class="card-body">
+    <h1 class="card-title"><img src="{{user.image.url}}" height="75px" class="" alt="..."> <strong>{{user.name}}</strong></h1>
+    <hr>
+    </div>
+    <div class="card-body">
+    {% if user.about is not None %}
+        <p class="card-text">{{user.about}}</p>
+    {% else %}
+        <p class="card-text"><i>No description provided.</i></p>
+    {% endif %}
+    </div>
+    <ul class="list-group list-group-flush">
+    {% if user.website is not None %}
+        <li class="list-group-item"><b>Website:</b> <a href="{{user.website}}">{{user.website}}</a></li>
+    {% endif %}
+    {% if user.github is not None %}
+        <li class="list-group-item"><b><i class="fab fa-github"></i></b> <a href="https://github.com/{{user.github}}">{{user.github}}</a></li>
+    {% endif %}
+    {% if user.user == request.user %}
+    <div class="card-footer text-muted">
+        <a href="{% url 'update-profile' %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
