@@ -16,9 +16,10 @@
     {% endfor %}
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{bench.category}}</li>
-        <li class="list-group-item">{{bench.capacity}}</li>
-        <li class="list-group-item">{{bench.condition}}</li>
+        <li class="list-group-item"><b>Category:</b> {{bench.category}}</li>
+        <li class="list-group-item"><b>Capacity:</b> {{bench.capacity}}</li>
+        <li class="list-group-item"><b>Condition:</b> {{bench.condition}}</li>
+        <li class="list-group-item"><b>Location:</b> {{bench.location}}</li>
     </ul>
     <div class="card-footer text-muted">
         {{bench.date_created}}

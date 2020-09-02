@@ -73,7 +73,7 @@ def CreateBench(request):
             obj = form.save(commit=False)
             obj.save()
             form.save_m2m()
-            return redirect('/b')
+            return redirect('/')
 
     return render(request, 'app/create.html', context)
 
