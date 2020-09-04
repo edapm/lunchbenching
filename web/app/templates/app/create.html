@@ -1,7 +1,4 @@
 {% extends 'app/generic.html' %}
-{% load mapbox_location_field_tags %}
-{% location_field_includes %}
-{% include_jquery %}
 {% load crispy_forms_tags %}
 {% block title %}
 <title>Lunchbenching - Create New Bench</title>
@@ -32,7 +29,6 @@
             {{form.capacity|as_crispy_field}}
         </div>
     </div>
-    {{form.location|as_crispy_field}}
     <button type="submit" class="btn btn-success btn-block bench-btn">Create Bench</button>
 </form>
 {{form.media}}

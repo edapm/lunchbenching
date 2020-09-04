@@ -1,10 +1,11 @@
+{% load crispy_forms_tags %}
 <div class="bench-sidebar">
   <nav class="menu" aria-labelledby="menu-heading">
     <span class="menu-heading" id="menu-heading"><i class="fas fa-search"></i> Search</span>
-    <a class="menu-item" href="#url">By Category</a>
-    <a class="menu-item" href="#url">By Capacity</a>
-    <a class="menu-item" href="#url">By Condition</a>
-    <a class="menu-item" href="#url">By Tags</a>
+    <form class="menu-item" method="get">
+      {{filter.form|crispy}}
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
   </nav>
 {% if benches.has_other_pages %}
   <nav class="bench-page text-align" aria-label="...">

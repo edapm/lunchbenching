@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from mapbox_location_field.models import LocationField
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 
@@ -36,7 +35,7 @@ class Bench(models.Model):
 
     name = models.CharField(max_length=30, null=True)
     description = models.TextField(max_length=350, null=True, blank=True)
-    location = LocationField(null=True, map_attrs={"center": [-0.1275, 51.50722]})
+    # location = 
     image = models.ImageField(default="default.png", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     category = models.CharField(max_length=30, null=True, choices=CATEGORY)
@@ -48,7 +47,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=True)
     about = models.TextField(max_length=150, null=True, blank=True)
-    website = models.URLField(null=True, blank=True)
+    website = models.CharField(max_length=50, null=True, blank=True)
     github = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True)
     image = models.ImageField(default="default.png", null=True, blank=True)

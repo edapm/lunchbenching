@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_filters',
-    'mapbox_location_field',
     'crispy_forms',
     'taggit',
 
@@ -135,5 +134,4 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-MAPBOX_KEY = "pk.eyJ1IjoiZm9yZ2Vuc3QiLCJhIjoiY2tlaGh1ZzNxMGJoNDJycGQydTNzaGFlMiJ9.kYOvI-wrPwgcGFq9wbMeNw"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

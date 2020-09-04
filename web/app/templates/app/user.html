@@ -17,7 +17,7 @@
     </div>
     <ul class="list-group list-group-flush">
     {% if user.website is not None %}
-        <li class="list-group-item"><b>Website:</b> <a href="{{user.website}}">{{user.website}}</a></li>
+        <li class="list-group-item"><b>Website:</b> <a href="https://{{user.website}}">{{user.website}}</a></li>
     {% endif %}
     {% if user.github is not None %}
         <li class="list-group-item"><b><i class="fab fa-github"></i></b> <a href="https://github.com/{{user.github}}">{{user.github}}</a></li>

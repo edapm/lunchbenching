@@ -9,6 +9,7 @@ from django.contrib.auth.models import Group
 from . models import *
 from . forms import *
 from . decorators import *
+from . filters import *
 
 # Create your views here.
 
@@ -63,17 +64,21 @@ def logoutUser(request):
 
 def home(request):
     all_benches = Bench.objects.all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(all_benches, 4)
+    # page = request.GET.get('page', 1)
+    # paginator = Paginator(all_benches, 4)
 
-    try:
-        benches = paginator.page(page)
-    except PageNotAnInteger:
-        benches = paginator.page(1)
-    except EmptyPage:
-        benches = paginator.page(paginator.num_pages)
 
-    context = {'benches': benches}
+    # try:
+    #     benches = paginator.page(page)
+    # except PageNotAnInteger:
+    #     benches = paginator.page(1)
+    # except EmptyPage:
+    #     benches = paginator.page(paginator.num_pages)
+    
+    filter = BenchFilter(request.GET, queryset=all_benches)
+    bench_filter = filter.qs
+
+    context = {'benches': all_benches, 'all': bench_filter, 'filter': filter}
     return render(request, 'app/home.html', context)
 
 def benches(request, pk):
