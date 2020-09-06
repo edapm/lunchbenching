@@ -11,6 +11,21 @@ from taggit.managers import TaggableManager
 #    def __str__(self):
 #        return self.name
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=True)
+    about = models.TextField(max_length=150, null=True, blank=True)
+    website = models.CharField(max_length=50, null=True, blank=True)
+    github = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(null=True)
+    image = models.ImageField(default="default.png", null=True, blank=True)
+    slug = models.SlugField()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(Profile, self).save(*args, **kwargs)
+
 class Bench(models.Model):
     CATEGORY = (
         ('Picnic Bench', 'Picnic Bench'),
@@ -43,16 +58,14 @@ class Bench(models.Model):
     tag = TaggableManager(blank=True)
     capacity = models.CharField(max_length=30, null=True, choices=CAPACITY)
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, null=True)
-    about = models.TextField(max_length=150, null=True, blank=True)
-    website = models.CharField(max_length=50, null=True, blank=True)
-    github = models.CharField(max_length=50, null=True, blank=True)
-    email = models.EmailField(null=True)
-    image = models.ImageField(default="default.png", null=True, blank=True)
-    slug = models.SlugField()
-    
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.user.username)
-        super(Profile, self).save(*args, **kwargs)
+    class Meta:
+        ordering = ['date_created']
+
+class Comments(models.Model):
+    bench = models.ForeignKey(Bench, on_delete=models.CASCADE, related_name='comments')
+    name = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']

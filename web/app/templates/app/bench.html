@@ -1,5 +1,6 @@
 {% extends 'app/generic.html' %}
 {% load humanize %}
+{% load crispy_forms_tags %}
 {% block title %}
     <title>Bench - {{bench.name}}</title>
 {% endblock title %}
@@ -29,6 +30,32 @@
         <a href="{% url 'update' bench.id %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
         {% endif %}
     </div>
+</div>
+
+{% for comment in comments %}
+<div class="comments" style="padding: 10px;">
+    <p class="font-weight-bold">
+    {{ comment.name }}
+    <span class=" text-muted font-weight-normal">
+        {{ comment.created_on|naturaltime }}
+    </span>
+    </p>
+    {{ comment.body | linebreaks }}
+</div>
+{% endfor %}
+<div class="card-body">
+    {% if new_comment %}
+    <div class="alert alert-success" role="alert">
+        Thank you for your comment!
+    </div>
+    {% else %}
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+    {% endif %}
 </div>
 
 {% endblock content %}

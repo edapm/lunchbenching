@@ -84,7 +84,24 @@ def home(request):
 def benches(request, pk):
     bench = Bench.objects.get(id=pk)
 
-    context={'bench': bench}
+    comments = bench.comments.filter()
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.bench = bench
+            new_comment.name = request.user
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    context={'bench': bench, 'comments': comments, 'new': new_comment, 'form': comment_form}
     return render(request, 'app/bench.html', context)
 
 def userProfile(request, slug):

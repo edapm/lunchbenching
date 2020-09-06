@@ -21,3 +21,8 @@ class UpdateProfileForm(ModelForm):
         model = Profile
         fields = '__all__'
         exclude = ['user', 'slug']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('body',)
