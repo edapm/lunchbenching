@@ -69,7 +69,7 @@ def home(request):
     bench_filter = filter.qs
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(bench_filter, 4)
+    paginator = Paginator(bench_filter, 6)
 
     try:
         benches = paginator.page(page)
@@ -78,7 +78,7 @@ def home(request):
     except EmptyPage:
         benches = paginator.page(paginator.num_pages)
 
-    context = {'benches': all_benches, 'all': bench_filter, 'filter': filter}
+    context = {'all': all_benches, 'benches': bench_filter, 'filter': filter}
     return render(request, 'app/home.html', context)
 
 def benches(request, pk):
