@@ -32,7 +32,7 @@
 {% for comment in comments %}
 <div class="comments card-body" style="padding: 10px;">
     <p class="font-weight-bold">
-        <img src="{{comment.name.profile.image.url}}" height="20px" width="20px" alt=""><a href="{% url 'user' comment.name %}">{{ comment.name }}</a>
+        <img src="{{comment.name.profile.image.url}}" height="20px" width="20px" alt="">&nbsp;<a href="{% url 'user' comment.name %}">{{ comment.name }}</a>
     <span class=" text-muted font-weight-normal">
         {{ comment.created_on|naturaltime }}
     </span>
