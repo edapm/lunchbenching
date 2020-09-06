@@ -116,7 +116,7 @@ def updateProfile(request):
     form = UpdateProfileForm(instance=user)
 
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST, instance=user)
+        form = UpdateProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
                 form.save()
                 return redirect('user', request.user)
@@ -134,7 +134,7 @@ def CreateBench(request):
 
     context = {'form':form}
     if request.method == 'POST':
-        form = CreateBenchForm(request.POST)
+        form = CreateBenchForm(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.save()
@@ -150,7 +150,7 @@ def UpdateBench(request, pk):
 
     context = {'form': form}
     if request.method == 'POST':
-        form = CreateBenchForm(request.POST, instance=bench)
+        form = CreateBenchForm(request.POST, request.FILES, instance=bench)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.save()
@@ -160,14 +160,14 @@ def UpdateBench(request, pk):
     return render(request, 'app/update.html', context)
 
 
-@login_required(login_url='login')
-def DeleteBench(request, pk):
-    bench = Bench.objects.get(id=pk)
-    if request.method == "POST":
-        bench.delete()
-        return redirect('bench-list')
-    
-    name = bench.name
-
-    context = {'item': bench, 'name': name}
-    return render(request, 'app/delete.html', context)
+#@login_required(login_url='login')
+#def DeleteBench(request, pk):
+#    bench = Bench.objects.get(id=pk)
+#    if request.method == "POST":
+#        bench.delete()
+#        return redirect('bench-list')
+#    
+#    name = bench.name
+#
+#    context = {'item': bench, 'name': name}
+#    return render(request, 'app/delete.html', context)

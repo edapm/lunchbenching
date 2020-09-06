@@ -16,7 +16,7 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ("username", "email", "password1", "password2")
     
-class UpdateProfileForm(ModelForm):
+class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'

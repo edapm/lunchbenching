@@ -5,14 +5,9 @@
 {% block content %}
 <div class="card push text-center">
     <div class="card-body">
-    <h1 class="card-title"><img src="{{user.image.url}}" height="75px" class="" alt="..."> <strong>{{user.name}}</strong></h1>
-    <hr>
-    </div>
-    <div class="card-body">
+    <h1 class="card-title"><img src="{{user.image.url}}" height="75px" width="75px" class="" alt="..."> <strong>{{user.name}}</strong></h1>
     {% if user.about is not None %}
-        <p class="card-text">{{user.about}}</p>
-    {% else %}
-        <p class="card-text"><i>No description provided.</i></p>
+        <p class="card-text"><b><i>{{user.about}}</i></b></p>
     {% endif %}
     </div>
     <ul class="list-group list-group-flush">
@@ -24,7 +19,7 @@
     {% endif %}
     {% if user.user == request.user %}
     <div class="card-footer text-muted">
-        <a href="{% url 'update-profile' %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
+        <a href="{% url 'update-profile' %}" class="btn btn-outline-dark btn-block" role="button">Edit</a>
     </div>
     {% endif %}
 </div>

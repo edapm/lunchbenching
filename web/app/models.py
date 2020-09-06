@@ -19,7 +19,7 @@ class Profile(models.Model):
     website = models.CharField(max_length=50, null=True, blank=True)
     github = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True)
-    image = models.ImageField(default="default.png", null=True, blank=True)
+    image = models.ImageField(default="default.png", null=True)
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
@@ -51,11 +51,11 @@ class Bench(models.Model):
     name = models.CharField(max_length=30, null=True)
     description = models.TextField(max_length=350, null=True, blank=True)
     # location = 
-    image = models.ImageField(default="default.png", null=True, blank=True)
+    image = models.ImageField(default="default.png", null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     category = models.CharField(max_length=30, null=True, choices=CATEGORY)
     condition = models.CharField(max_length=30, null=True, choices=CONDITION)
-    tag = TaggableManager(blank=True)
+    # tag = TaggableManager(blank=True)
     capacity = models.CharField(max_length=30, null=True, choices=CAPACITY)
 
     class Meta:

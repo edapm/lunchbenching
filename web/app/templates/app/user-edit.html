@@ -6,12 +6,12 @@
 {% block content %}
 <h1 class="bench-title text-align">Edit your Profile</h1>
 <hr>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
         <div class="col">
             {{form.name|as_crispy_field}}
-            {{form.image|as_crispy_field}}
+            {{form.image}}
         </div>
         <div class="col">
             {{form.about|as_crispy_field}}

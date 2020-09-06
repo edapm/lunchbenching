@@ -12,31 +12,27 @@
     <hr>
     <p class="card-text">{{bench.description}}</p>
     </div>
-    <div class="card-body">
-    {% for tag in bench.tag.all %}
-        <span class="badge badge-primary">{{tag}}</span>
-    {% endfor %}
-    </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><b>Category:</b> {{bench.category}}</li>
         <li class="list-group-item"><b>Capacity:</b> {{bench.capacity}}</li>
         <li class="list-group-item"><b>Condition:</b> {{bench.condition}}</li>
-        <li class="list-group-item"><b>Location:</b> {{bench.location}}</li>
+        <!--<li class="list-group-item"><b>Location:</b> {{bench.location}}</li>-->
     </ul>
     <div class="card-footer text-muted">
         {{bench.date_created|naturaltime}}
         {% if request.user.is_authenticated %}
         <hr>
-        <a href="{% url 'update' bench.id %}" class="btn btn-primary btn-lg btn-block" role="button">Edit</a>
+        <a href="{% url 'update' bench.id %}" class="btn btn-outline-primary btn-block" role="button">Edit</a>
         {% endif %}
     </div>
 </div>
 
-<div class="card">
+<div class="card push">
+<h2 class="text-align push">Comments</h2>
 {% for comment in comments %}
 <div class="comments card-body" style="padding: 10px;">
     <p class="font-weight-bold">
-        <img src="{{comment.name.profile.image.url}}" height="20px" alt=""><a href="{% url 'user' comment.name %}">{{ comment.name }}</a>
+        <img src="{{comment.name.profile.image.url}}" height="20px" width="20px" alt=""><a href="{% url 'user' comment.name %}">{{ comment.name }}</a>
     <span class=" text-muted font-weight-normal">
         {{ comment.created_on|naturaltime }}
     </span>
