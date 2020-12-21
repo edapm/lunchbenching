@@ -1,0 +1,6 @@
+django
+gunicorn
+django-heroku
+django-filters
+django-crispy-forms
+django-taggit
